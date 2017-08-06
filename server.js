@@ -36,7 +36,7 @@ app.post("/fetch", function(request, response) {
     
     var result = {
       value: forumPostCount,
-      comment: 'via Akrasia integration: Pinboard Unread Count'
+      comment: 'via Akrasia integration: Beeminder Forum Posts Count'
     };
     akrasiaCallback(callbackSession, result);
     console.log(result);
