@@ -22,23 +22,31 @@ var akrasiaCallback = function(session, result) {
 
 app.post("/fetch", function(request, response) {
   console.log('Fetch called.');
+  // Get the session and user options from Akrasia's request
   var callbackSession = request.body.session;
   var userOptions = request.body.user_options;
   
-  var forumUsername = userOptions.forum_username;
-  
   response.send({'result': 'started'});
   
+  // Get the user's forum name (set and stored through Akrasia) from the passed options
+  var forumUsername = userOptions.forum_username;
+  
+  // Get the user's profile from the forum API, grab the post count, and submit the datapoint to Akrasia
   Request('http://forum.beeminder.com/u/' +  forumUsername + '/summary.json', function(err, res, body) {
     var forumData = JSON.parse(body);
     
     var forumPostCount = forumData.user_summary.post_count;
     
+    // Create the datapoint with value (and optional comment)
     var result = {
       value: forumPostCount,
       comment: 'via Akrasia integration: Beeminder Forum Posts Count'
     };
+    
+    // Send the datapoint to Akrasia
     akrasiaCallback(callbackSession, result);
+    
+    // Not necessary, but helps you debug in Glitch!
     console.log(result);
   });
 });
