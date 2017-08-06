@@ -6,8 +6,9 @@ var Request = require('request');
 var app = express();
 
 app.use(express.static('public'));
-app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.json());
 
+// Use this helper method to send the datapoint back to Akrasia once you've got it
 var AKRASIA_BASE_URL = 'https://akr.asia'
 var akrasiaCallback = function(session, result) {
   Request.post({
