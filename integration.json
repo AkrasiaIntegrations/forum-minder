@@ -1,0 +1,13 @@
+{
+  "beeminder_forum_posts": {
+    "title": "Beeminder Forum Posts Count",
+    "description": "Use an odometer goal for this integration.",
+    "category": "Fun",
+    "fetch_url": "https://forum-minder.glitch.me/fetch",
+    "fields": {
+      "forum_username": {
+        "name": "Beeminder Forum Username"
+      }
+    }
+  }
+}
